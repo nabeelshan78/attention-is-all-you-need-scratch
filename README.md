@@ -310,7 +310,7 @@ Causal mask + padding mask combined: ALL CHECKS PASSED
 ### Multi-Head Attention
 ```
 MHA Trainable Parameters: 1,050,624
-Mathematical Expectation: 1,050,624  ← EXACT MATCH
+Mathematical Expectation: 1,050,624  <- EXACT MATCH
 Split/Combine heads: perfect identity loop
 Cross-attention (S_q=4 ≠ S_k=6): PASSED
 ```
@@ -327,7 +327,7 @@ Cross-attention (S_q=4 ≠ S_k=6): PASSED
   Output Projection Block:          0 (zero cost - weight-tied)
   ─────────────────────────────────────────────────────────
   Actual Trainable Count:  63,082,496
-  Mathematical Expectation: 63,082,496  ← EXACT MATCH
+  Mathematical Expectation: 63,082,496  <- EXACT MATCH
 ```
 
 ---
@@ -460,7 +460,7 @@ class TransformerConfig:
     label_smoothing: float = 0.1
 ```
 
-> **Note on warmup_steps:** The paper uses 4000 warmup steps for a dataset of 4.5M sentence pairs trained for 300,000 steps. With 22k sentences and ~24,000 steps (684 batches x 35 epochs), `warmup_steps=2000` puts the LR peak at roughly the same fractional point in training (~8% of total steps vs. ~1.3% in the paper). This is a deliberate, documented adaptation - not a copy-paste error.
+> **Note on warmup_steps:** The paper uses 4000 warmup steps for a dataset of 4.5M sentence pairs trained for 300,000 steps. With 22k sentences and ~24,000 steps (684 batches x 35 epochs), `warmup_steps=2000` puts the LR peak at roughly the same fractional point in training (~8% of total steps vs. ~1.3% in the paper).
 
 ---
 
@@ -472,7 +472,7 @@ This section exists because intellectual honesty is a research skill.
 
 - **Generalization gap (0.836) is data-scale expected behavior.** Training on 22k literary sentence pairs with archaic vocabulary will produce a gap - this is a dataset regime effect, not an architectural failure. The gap is stable (not diverging), which is the important thing. The same architecture on WMT14 (4.5M pairs) closes this substantially.
 
-- **PPL ~519 on a 22k literary corpus is expected.** The original paper trains on 4.5M sentence pairs for 300k steps across 8 P100s. This run uses 35 epochs on a single Colab GPU. The architecture is identical - the gap is entirely a function of data and compute scale, both of which are documented and understood.
+- **PPL ~519 on a 22k literary corpus is expected.** The original paper trains on 4.5M sentence pairs. This run uses 35 epochs on a single Colab GPU. The architecture is identical - the gap is entirely a function of data and compute scale, both of which are documented and understood.
 
 - **Inference output quality scales with training data.** Both greedy and beam search decoding are fully implemented and correct. Output quality on out-of-domain sentences will improve with more training data - the decoding logic itself is verified through the component test suite.
 
@@ -501,29 +501,9 @@ $$\mathcal{L} = -(1 - \varepsilon) \log p_y - \frac{\varepsilon}{V} \sum_{i} \lo
 
 ## About
 
-I'm **Nabeel Shan**, a Software Engineering student at NUST, Pakistan (CGPA 3.63/4.0, graduating May 2027). My research interests are LLM reasoning, LLM efficiency, alignment, and RL applications in LLMs and agentic AI systems.
-
-This project is part of a broader portfolio that includes implementations of RLHF, LoRA fine-tuning, RAG pipelines, and agentic AI systems - all built from scratch because understanding the internals is the only way to push them forward.
-
-I'm applying for fully funded thesis-based Master's positions in Canada for Fall 2027, with the goal of contributing to fundamental research in LLM efficiency and reasoning before moving into industry.
+I'm **Nabeel Shan**, a Software Engineering student at NUST, Pakistan (graduating May 2027). My research interests are LLM reasoning, efficiency, alignment, and RL applications in LLMs and agentic AI systems.
 
 **GitHub:** [nabeelshan78](https://github.com/nabeelshan78)
-
----
-
-## References
-
-```bibtex
-@article{vaswani2017attention,
-  title   = {Attention Is All You Need},
-  author  = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and
-             Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and
-             Kaiser, {\L}ukasz and Polosukhin, Illia},
-  journal = {Advances in Neural Information Processing Systems},
-  volume  = {30},
-  year    = {2017}
-}
-```
 
 ---
 
